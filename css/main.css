@@ -1,9 +1,11 @@
 /* CSS de uso general */
 
 :root {
+    
     --main-color: #232F3E;
-    --body-color: rgb(152, 153, 153);
+    --body-color: rgb(196, 196, 196);
     --decoration-color: #F3A847;
+    
 }
 
 * {
@@ -104,6 +106,7 @@ input {
 }
 
 .userInp {
+    border-radius: 7px;
     background-color: var(--body-color);
 }
 
@@ -146,7 +149,7 @@ th, td {
     height: 100%;
     font-size: 20px;
     border-radius: 5px;
-    background-color: #F53000;
+    background-color: #BF2717;
     color: white;
     padding: 10px;
 }
@@ -156,3 +159,49 @@ th, td {
     height: 22px;
 }
 
+/* Crear el POPUP que salta como notificación */
+.hover_bkgr_fricc{
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:left;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+.hover_bkgr_fricc .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+.hover_bkgr_fricc > div {
+    background-color: #74be71;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: bottom;
+    margin-left: 10%;
+    margin-bottom: 40px;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+}
+.popupCloseButton {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 35px;
+    right: 25px;
+    font-size: 20px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+#popText {
+    margin-top: 20px;
+}

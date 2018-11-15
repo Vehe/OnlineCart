@@ -23,8 +23,8 @@
         <link href="img/icono.png" rel="shortcut icon" type="image/png">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script src="js/main.js"></script>
         <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/main.js"></script>
     </head>
     <header>
         <div class="dropdown">
@@ -46,7 +46,7 @@
             <div class="rowdata">
             <?php
 
-                $sql = 'select nombre, stock from productos';
+                $sql = 'select nombre, pvp from productos';
                 $query = mysqli_prepare($conexion,$sql);
                 $aux = 0;
                 $cont = 0;
@@ -54,15 +54,15 @@
                 for($i=0;$i<2;$i++){
                     if($i == 0){
                         mysqli_stmt_execute($query);
-                        mysqli_stmt_bind_result($query,$nombre,$stock);
+                        mysqli_stmt_bind_result($query,$nombre,$pvp);
 
                         echo '<div class="coldata">';
-                        echo '<form action=""><input type="text" class="nombres" value="NOMBRE" readonly="readonly"><input type="text" class="nombres" value="STOCK" readonly="readonly"><input type="text" class="nombres" value="CANTIDAD" readonly="readonly"></form>';
+                        echo '<form action=""><input type="text" class="nombres" value="NOMBRE" readonly="readonly"><input type="text" class="nombres" value="PRECIO" readonly="readonly"><input type="text" class="nombres" value="CANTIDAD" readonly="readonly"></form>';
                         echo '<form action="index.php" class="insideForm" method="POST" id="form'.$aux.'">';
                         while(mysqli_stmt_fetch($query)){
                             
                             echo '<input type="text" name="nombre" value="'.$nombre.'" class="inp'.$aux.'" readonly="readonly">';
-                            echo '<input type="number" name="stock" value="'.$stock.'" class="inp'.$aux.'" readonly="readonly">';
+                            echo '<input type="text" name="pvp" value="'.$pvp.' €\u" class="inp'.$aux.'" readonly="readonly">';
                             echo '<input type="number" id="canti'.$aux.'" name="cantidad" value="0" class="inp'.$aux.' userInp">';
                             $aux++;
                             if($i == 0) {$cont++;};
@@ -82,6 +82,14 @@
                 mysqli_stmt_close($query);
                 mysqli_close($conexion);
             ?>
+            </div>
+
+            <div class="hover_bkgr_fricc">
+            <span class="helper"></span>
+                <div>
+                    <div class="popupCloseButton" onclick="closeAlertRemove()">X</div>
+                    <p id="popText"></p>
+                </div>
             </div>
         </main>
     </body>

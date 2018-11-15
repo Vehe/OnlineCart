@@ -1,6 +1,5 @@
 // Variables de uso global
 var org_content = []
-var titulos = true;
 var contArt = 0;
 
 function addProductToCart(num) {
@@ -11,9 +10,8 @@ function addProductToCart(num) {
         org_content.push(elements[i].value);
     }
 
-    //document.getElementById("canti"+num).value = 0;
-
     // Realiza un post al index con los valores que se guardaran como cookies
+    
     $.ajax ({
         type: 'POST',
         url: 'index.php',
@@ -22,6 +20,7 @@ function addProductToCart(num) {
             v: org_content[2]
         },
     });
+    
 
     /* Borramos el contenido de la tabla antes de añadir */
     document.getElementsByClassName("errorCarrito").remove();
@@ -30,7 +29,8 @@ function addProductToCart(num) {
         Lo que hace es que cada vez que se añade algo al carrito, muestra en el desplegable
         el nuevo producto insertado, con su respectivo nombre y cantidad añadida
     */
-    if(titulos){CarritoAlert.title();}
+    var elemtit = document.getElementsByClassName("removeTitle");
+    if(elemtit.length < 1) {CarritoAlert.title();}
     var elem = document.getElementsByClassName("chout");
     if(elem.length >= 1) {document.getElementsByClassName("chout").remove();}
     if(obtenerCookie(org_content[0]) == "") {
@@ -44,7 +44,6 @@ function addProductToCart(num) {
     CarritoAlert.button();
 
     org_content = []
-    titulos = false;
 }
 
 function init() {
@@ -68,6 +67,7 @@ function init() {
         CarritoAlert.startWithCookies();
         for(var n = 0; n < cContName.length; n++) {
             CarritoAlert.addProduct(cContName[n],cContVal[n]);
+            contArt++;
         }
         CarritoAlert.button();
     }   
@@ -105,18 +105,16 @@ var CarritoAlert = new function() {
     */
     this.title = function() {
         var trPadre = document.createElement("TR");
+        trPadre.setAttribute("class", "removeTitle");
         var thProd = document.createElement("TH");
-        thProd.setAttribute("class", "removeTitle");
         var t = document.createTextNode("Producto");
         thProd.appendChild(t);
         trPadre.appendChild(thProd);
         var thCant = document.createElement("TH");
-        thCant.setAttribute("class", "removeTitle");
         var z = document.createTextNode("Cantidad");
         thCant.appendChild(z);
         trPadre.appendChild(thCant);
         var thCancel = document.createElement("TH");
-        thCancel.setAttribute("class", "removeTitle");
         var x = document.createTextNode("");
         thCancel.appendChild(x);
         trPadre.appendChild(thCancel);
@@ -154,6 +152,7 @@ var CarritoAlert = new function() {
     this.removeProduct = function(nombre) {
         document.getElementsByClassName(nombre).remove();
         borrarCookie(nombre);
+        borradoCorrectamente(nombre);
         contArt--;
         if(contArt == 0){
             CarritoAlert.carritoEmpty();
@@ -221,6 +220,20 @@ function obtenerCookie(clave) {
         if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
     }
     return "";
+}
+
+/*
+    Se encarga de mostrar y de borrar el mensaje de alerta que se le muestra
+    al usuario al eliminar un producto del desplegable del carrito.
+*/
+function borradoCorrectamente(nombre) {
+    document.getElementsByClassName("hover_bkgr_fricc")[0].style.display = "block";
+    document.getElementById("popText").innerHTML = "Se ha eliminado el producto \""+nombre+"\" satisfactoriamente.";
+    setTimeout(function(){ document.getElementsByClassName("hover_bkgr_fricc")[0].style.display = "none"; }, 3000);
+}
+
+function closeAlertRemove() {
+    document.getElementsByClassName("hover_bkgr_fricc")[0].style.display = "none";
 }
 
 
