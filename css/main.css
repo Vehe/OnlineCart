@@ -1,0 +1,158 @@
+/* CSS de uso general */
+
+:root {
+    --main-color: #232F3E;
+    --body-color: rgb(152, 153, 153);
+    --decoration-color: #F3A847;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin:0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--body-color);
+    font-family: 'Roboto Mono', monospace;
+}
+
+header {
+    background-color: var(--main-color);
+}
+
+img {
+    height: 70px;
+    cursor: pointer;
+}
+
+main {
+    margin-left: 20%;
+    margin-right: 20%;
+    height:100%;
+    background-color: white;
+}
+
+form {
+    margin: 0;
+}
+
+input {
+    text-align: center;
+    margin-bottom: 0.78em;
+    width: 33.33%;
+    height: 100%;
+    padding: 19px;
+    font-size: 19px;
+    border:none;
+}
+
+/* Creación del cuerpo de la página en columnas */
+.coldata {
+    float: left;
+    width: 70%;
+    height: 100%;
+}
+
+.colbtn {
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: center;
+}
+
+.rowdata {
+    height: auto;
+    background-color: white;
+}
+
+.rowdata:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* CSS PROPIO */
+
+.nombres {
+    margin: 0;
+    padding: 15px;
+    padding-bottom: 25px;
+    font-size: 20px;
+    color: var(--decoration-color);
+}
+
+.insideForm {
+    font-size: 15px;
+}
+
+#add_form_dec {
+    width: 100%;
+}
+
+.colbtn button {
+    cursor: pointer;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 0.92em;
+    width: 80%;
+    font-size: 15px;
+    padding: 20px;
+    background-color: var(--decoration-color);
+    border-radius: 7px;
+}
+
+.userInp {
+    background-color: var(--body-color);
+}
+
+/* CREACIÓsN DEL DESPLEGABLE CARRITO */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+tr {
+    text-align: left;
+}
+
+th, td {
+    padding: 10px;
+}
+
+.btncontainer {
+    padding: 0;
+}
+
+.checkoutbtn {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: #F53000;
+    color: white;
+    padding: 10px;
+}
+
+.cancelbtn {
+    width: 22px;
+    height: 22px;
+}
+
