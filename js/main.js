@@ -132,7 +132,7 @@ var CarritoAlert = new function() {
         tdProd.setAttribute("colspan", "3");
         tdProd.setAttribute("class", "btncontainer");
         var formPadre = document.createElement("FORM");
-        formPadre.setAttribute("action", "ver.php");
+        formPadre.setAttribute("action", "carrito.php");
         var btnPadre = document.createElement("BUTTON");
         btnPadre.setAttribute("type", "submit");
         btnPadre.setAttribute("class", "checkoutbtn");

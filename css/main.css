@@ -1,11 +1,9 @@
 /* CSS de uso general */
 
 :root {
-    
-    --main-color: #232F3E;
-    --body-color: rgb(196, 196, 196);
-    --decoration-color: #F3A847;
-    
+    --main-color: #343A40;
+    --body-color: white;
+    --decoration-color: #138496;
 }
 
 * {
@@ -95,6 +93,7 @@ input {
 
 .colbtn button {
     cursor: pointer;
+    color: white;
     margin-left: 10%;
     margin-right: 10%;
     margin-bottom: 0.92em;
@@ -149,7 +148,7 @@ th, td {
     height: 100%;
     font-size: 20px;
     border-radius: 5px;
-    background-color: #BF2717;
+    background-color: var(--decoration-color);
     color: white;
     padding: 10px;
 }
