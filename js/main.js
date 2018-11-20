@@ -2,51 +2,7 @@
 var org_content = []
 var contArt = 0;
 
-function addProductToCart(num) {
-
-    // Selecciona todos los elementos ej.: inp0 y guarda los valores en el array
-    var elements = document.getElementsByClassName("inp"+num);
-    for(var i=0; i<elements.length; i++) {
-        org_content.push(elements[i].value);
-    }
-
-    // Realiza un post al index con los valores que se guardaran como cookies
-    
-    $.ajax ({
-        type: 'POST',
-        url: 'index.php',
-        data: {
-            n: org_content[0],
-            v: org_content[2]
-        },
-    });
-    
-
-    /* Borramos el contenido de la tabla antes de añadir */
-    document.getElementsByClassName("errorCarrito").remove();
-
-    /*
-        Lo que hace es que cada vez que se añade algo al carrito, muestra en el desplegable
-        el nuevo producto insertado, con su respectivo nombre y cantidad añadida
-    */
-    var elemtit = document.getElementsByClassName("removeTitle");
-    if(elemtit.length < 1) {CarritoAlert.title();}
-    var elem = document.getElementsByClassName("chout");
-    if(elem.length >= 1) {document.getElementsByClassName("chout").remove();}
-    if(obtenerCookie(org_content[0]) == "") {
-        CarritoAlert.addProduct(org_content[0],org_content[2]);
-        contArt++;
-    } else {
-        document.cookie = org_content[0]+"="+org_content[2];
-        CarritoAlert.removeRepitedProduct(org_content[0]);
-        CarritoAlert.addProduct(org_content[0],org_content[2]);
-    }
-    CarritoAlert.button();
-
-    org_content = []
-}
-
-function init() {
+window.addEventListener("load",function() {
     /*
         La función se ejecuta al entrar en la página, comprueba si hay cookies
         en caso de que si, las añade a el carrito desplegable para verlas de manera visual para usuario
@@ -70,8 +26,63 @@ function init() {
             contArt++;
         }
         CarritoAlert.button();
-    }   
-}
+    }
+
+    /*
+        A todos los botones de la página, en este caso los que se usan para añadir productos,
+        se les crea un event listener, para que ejecute una función, tomando como parámetro el numero
+        de la clase de cada botón.
+    */
+    var botonesPag = document.getElementsByTagName("button");
+    for(var i = 0; i < botonesPag.length; i++) {
+        if(botonesPag[i].className != 'checkoutbtn'){
+            botonesPag[i].addEventListener("click",function() {
+                var num = this.className.substring(3);
+                
+                // Selecciona todos los elementos ej.: inp0 y guarda los valores en el array
+                var elements = document.getElementsByClassName("inp"+num);
+                for(var i=0; i<elements.length; i++) {
+                    org_content.push(elements[i].value);
+                }
+    
+                // Realiza un post al index con los valores que se guardaran como cookies
+                $.ajax ({
+                    type: 'POST',
+                    url: 'index.php',
+                    data: {
+                        n: org_content[0],
+                        v: org_content[2]
+                    },
+                });
+                
+    
+                /* Borramos el contenido de la tabla antes de añadir */
+                document.getElementsByClassName("errorCarrito").remove();
+    
+                /*
+                    Lo que hace es que cada vez que se añade algo al carrito, muestra en el desplegable
+                    el nuevo producto insertado, con su respectivo nombre y cantidad añadida
+                */
+                var elemtit = document.getElementsByClassName("removeTitle");
+                if(elemtit.length < 1) {CarritoAlert.title();}
+                var elem = document.getElementsByClassName("chout");
+                if(elem.length >= 1) {document.getElementsByClassName("chout").remove();}
+                if(obtenerCookie(org_content[0]) == "") {
+                    CarritoAlert.addProduct(org_content[0],org_content[2]);
+                    contArt++;
+                } else {
+                    document.cookie = org_content[0]+"="+org_content[2];
+                    CarritoAlert.removeRepitedProduct(org_content[0]);
+                    CarritoAlert.addProduct(org_content[0],org_content[2]);
+                }
+                CarritoAlert.button();
+    
+                org_content = []
+    
+            },false);
+        }
+    }
+},false);
 
 var CarritoAlert = new function() {
     /*

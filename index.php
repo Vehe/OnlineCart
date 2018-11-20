@@ -26,22 +26,22 @@
         <script src="js/jquery-3.3.1.js"></script>
         <script src="js/main.js"></script>
     </head>
-    <header>
-        <div class="dropdown">
-            <img src="img/cart.png">
-            <div class="dropdown-content">
-                <table id="contenidoCarrito">
-                    <tr class="errorCarrito">
-                        <th><img src="img/error.gif" class="notfound"></th>
-                    </tr>
-                    <tr class="errorCarrito">
-                        <td>El carrito esta vacío.</td>
-                    </tr>
-                </table>
+    <body>
+        <header>
+            <div class="dropdown">
+                <img src="img/cart.png">
+                <div class="dropdown-content">
+                    <table id="contenidoCarrito">
+                        <tr class="errorCarrito">
+                            <th><img src="img/error.gif" class="notfound"></th>
+                        </tr>
+                        <tr class="errorCarrito">
+                            <td>El carrito esta vacío.</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
-    </header>
-    <body onload="init()">
+        </header>
         <main>
             <div class="rowdata">
             <?php
@@ -60,7 +60,6 @@
                         echo '<form action=""><input type="text" class="nombres" value="NOMBRE" readonly="readonly"><input type="text" class="nombres" value="PRECIO" readonly="readonly"><input type="text" class="nombres" value="CANTIDAD" readonly="readonly"></form>';
                         echo '<form action="index.php" class="insideForm" method="POST" id="form'.$aux.'">';
                         while(mysqli_stmt_fetch($query)){
-                            
                             echo '<input type="text" name="nombre" value="'.$nombre.'" class="inp'.$aux.'" readonly="readonly">';
                             echo '<input type="text" name="pvp" value="'.$pvp.' €\u" class="inp'.$aux.'" readonly="readonly">';
                             echo '<input type="number" id="canti'.$aux.'" name="cantidad" value="0" class="inp'.$aux.' userInp">';
@@ -73,7 +72,7 @@
                         echo '<div class="colbtn">';
                         echo '<form action=""><input type="text" id="add_form_dec" class="nombres" value="AÑADIR" readonly="readonly"></form>';
                         for($j=0;$j<$cont;$j++){
-                            echo '<button class="btn'.$j.'" onclick="addProductToCart('.$j.')" name="add_to_cart">Añadir al Carrito</button>';
+                            echo '<button class="btn'.$j.'" name="add_to_cart">Añadir a la cesta</button>';
                         }
                         echo '</div>';
                     }

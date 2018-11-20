@@ -16,17 +16,43 @@
         <link href="img/icono.png" rel="shortcut icon" type="image/png">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/carrito.css">
-        <script src="js/jquery-3.3.1.js"></script>
-        <script src="js/main.js"></script>
+        <script src="js/carrito.js"></script>
     </head>
-    <header></header>
-    <body>
-        <main>
-            <div class="titulo">
+    <body class="bodycssloader">
+        <header class="contenidomain">
+            <nav>
+                <ul>
+                    <li><a href="index.php">Volver a la Tienda</a></li>
+                </ul>
+            </nav>
+        </header>
+        <section class="loadercontent">
+            <div id="app-cover">
+                <div class="square">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>    
+                <div id="ghost">
+                    <div id="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                    </div>
+                    <div id="mouth"></div>
+                    <div id="legs"></div>
+                </div>
+            </div>     
+        </section>
+        <div class="titulo loadercontent">
+            <h1>Cargando contenido del carrito ...</h1>
+        </div>
+        <main class="contenidomain">
+            <div class="titulopag">
                 <h1>Artículos</h1>
             </div>
             <div class="contendiocarrito">
-                <table>
+                <table id="cesta">
                     <tr>
                         <th>Nº. Articulos</th>
                         <th>Nombre</th>
@@ -44,10 +70,10 @@
                                 mysqli_stmt_bind_result($query,$precio);
                                 mysqli_stmt_fetch($query);
                                 $sumatotal += $val*floatval($precio);
-                                echo '<tr>';
+                                echo '<tr id="'.$key.'">';
                                 echo '<td>'.$val.'</td>';
-                                echo '<td>'.$key.'</td>';
-                                echo '<td>'.($val*floatval($precio)).'€</td>';
+                                echo '<td>'.$key.'  <a href="#" id="'.$key.'" class="borrarproducto">Borrar</a></td>';
+                                echo '<td id="precio'.$key.'">'.($val*floatval($precio)).'€</td>';
                                 echo '</tr>';
                                 mysqli_stmt_close($query);
                             }
@@ -59,7 +85,7 @@
 
                     <tr class="finalinfo">
                         <td>Precio total</td>
-                        <td><?=$sumatotal?>€</td>
+                        <td id="costetotal"><?=$sumatotal?>€</td>
                         <td class="btncontainer"><button>Finalizar Compra</button></td>
                     </tr>
                 </table>
