@@ -44,41 +44,40 @@ window.addEventListener("load",function() {
                 for(var i=0; i<elements.length; i++) {
                     org_content.push(elements[i].value);
                 }
-    
-                // Realiza un post al index con los valores que se guardaran como cookies
-                $.ajax ({
-                    type: 'POST',
-                    url: 'index.php',
-                    data: {
-                        n: org_content[0],
-                        v: org_content[2]
-                    },
-                });
-                
-    
-                /* Borramos el contenido de la tabla antes de añadir */
-                document.getElementsByClassName("errorCarrito").remove();
-    
-                /*
-                    Lo que hace es que cada vez que se añade algo al carrito, muestra en el desplegable
-                    el nuevo producto insertado, con su respectivo nombre y cantidad añadida
-                */
-                var elemtit = document.getElementsByClassName("removeTitle");
-                if(elemtit.length < 1) {CarritoAlert.title();}
-                var elem = document.getElementsByClassName("chout");
-                if(elem.length >= 1) {document.getElementsByClassName("chout").remove();}
-                if(obtenerCookie(org_content[0]) == "") {
-                    CarritoAlert.addProduct(org_content[0],org_content[2]);
-                    contArt++;
-                } else {
-                    document.cookie = org_content[0]+"="+org_content[2];
-                    CarritoAlert.removeRepitedProduct(org_content[0]);
-                    CarritoAlert.addProduct(org_content[0],org_content[2]);
+
+                if(org_content[2] > 0) {
+                    // Realiza un post al index con los valores que se guardaran como cookies
+                    $.ajax ({
+                        type: 'POST',
+                        url: 'index.php',
+                        data: {
+                            n: org_content[0],
+                            v: org_content[2]
+                        },
+                    });
+
+                    /* Borramos el contenido de la tabla antes de añadir */
+                    document.getElementsByClassName("errorCarrito").remove();
+        
+                    /*
+                        Lo que hace es que cada vez que se añade algo al carrito, muestra en el desplegable
+                        el nuevo producto insertado, con su respectivo nombre y cantidad añadida
+                    */
+                    var elemtit = document.getElementsByClassName("removeTitle");
+                    if(elemtit.length < 1) {CarritoAlert.title();}
+                    var elem = document.getElementsByClassName("chout");
+                    if(elem.length >= 1) {document.getElementsByClassName("chout").remove();}
+                    if(obtenerCookie(org_content[0]) == "") {
+                        CarritoAlert.addProduct(org_content[0],org_content[2]);
+                        contArt++;
+                    } else {
+                        document.cookie = org_content[0]+"="+org_content[2];
+                        CarritoAlert.removeRepitedProduct(org_content[0]);
+                        CarritoAlert.addProduct(org_content[0],org_content[2]);
+                    }
+                    CarritoAlert.button();
                 }
-                CarritoAlert.button();
-    
-                org_content = []
-    
+                org_content = [];
             },false);
         }
     }
@@ -147,7 +146,7 @@ var CarritoAlert = new function() {
         var btnPadre = document.createElement("BUTTON");
         btnPadre.setAttribute("type", "submit");
         btnPadre.setAttribute("class", "checkoutbtn");
-        var t = document.createTextNode("Check Out");
+        var t = document.createTextNode("Procesar Pedido");
         btnPadre.appendChild(t);
         formPadre.appendChild(btnPadre);
         tdProd.appendChild(formPadre);

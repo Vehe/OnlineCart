@@ -16,6 +16,8 @@
         <link href="img/icono.png" rel="shortcut icon" type="image/png">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/carrito.css">
+        <script src="js/jquery-3.3.1.js"></script>
+        <script src="js/jquery.redirect.js"></script>
         <script src="js/carrito.js"></script>
     </head>
     <body class="bodycssloader">
@@ -85,10 +87,17 @@
 
                     <tr class="finalinfo">
                         <td>Precio total</td>
-                        <td id="costetotal"><?=$sumatotal?>€</td>
-                        <td class="btncontainer"><button>Finalizar Compra</button></td>
+                        <td id="costetotal"><?=$sumatotal?>€</td>   
+                        <td class="btncontainer"><button id="finalizarcompra">Finalizar Compra</button></td>
                     </tr>
                 </table>
+            </div>
+            <div class="dniinput">
+                <h2>Introduce un DNI para identificarte:</h2>
+                <div class="dni">
+                    <input type="text" id="userdni" value="00391578A">
+                    <button id="procesarpedido">Procesar Pedido</button>
+                </div>
             </div>
         </main>
     </body>

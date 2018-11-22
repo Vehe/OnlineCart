@@ -8,6 +8,12 @@ Carrito de la compra realizado en PHP, acompañado de uso de JavaScript para la 
 - BUGFIX: Arreglados errores varios en la tabla carrito.php.
 
 Rediseñado el archivo main.js en cuanto al tema de los event listener.
+Creado el archivo testfile.php para debuggear y probar las sentencias FOR UPDATE de MYSQL.
 
 ## TODO
+
+- Realizar filtrado de cookies en la página de carrito.php, ya que esta usando todas las cookies del navegador, no solo las de la página.
+- Borrar cookies en caso de que se realice el commit correctamente.
+- Mostrar una tabla en el archivo factura con los datos correspondientes.
+- Buscar posibles bugs de JS
 

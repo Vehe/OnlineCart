@@ -308,3 +308,37 @@ th, td {
     left: 22px;
     box-shadow: inset -3px 0 0 0px #e4e4e4;
 }
+
+/* dni */
+
+.dniinput {
+    display: none;
+    margin-top: 60px;
+    text-align: center;
+    background-color: var(--main-color);
+    color: white;
+}
+
+h2 {
+    padding: 20px;
+}
+
+.dniinput button {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 15px;
+    background-color: var(--decoration-color)
+}
+
+.dniinput input {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    height: 28px;
+}
+
+.dni {
+    padding: 20px;
+}

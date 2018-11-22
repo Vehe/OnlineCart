@@ -16,7 +16,7 @@ window.addEventListener("load",function() {
             document.cookie = e.target.id + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
             var valorunidad = parseFloat(document.getElementById("precio"+e.target.id).textContent.slice(0, -1));
             var costetotal = parseFloat(document.getElementById("costetotal").textContent.slice(0, -1));
-            document.getElementById("costetotal").innerHTML = costetotal-valorunidad;
+            document.getElementById("costetotal").innerHTML = Math.round((costetotal-valorunidad) * 100) / 100 + '€';
             document.getElementById(e.target.id).remove();
             contadorProductos--;
             if(contadorProductos == 0) {
@@ -24,8 +24,34 @@ window.addEventListener("load",function() {
             }
         },false);
     }
+
+    this.document.getElementById("finalizarcompra").addEventListener("click",function() {
+        if(parseInt(document.getElementById("costetotal").textContent.slice(0, -1)) != 0) {
+            document.getElementsByClassName("dniinput")[0].style.display = "block";
+            document.getElementById("userdni").focus();
+        }
+    },false);
+
+    this.document.getElementById("procesarpedido").addEventListener("click",function() {
+        if(document.getElementById('userdni').value.length == 9) {
+            var myCookies = getCookies();
+            $.redirect('factura.php', { json_string:JSON.stringify(myCookies), dni:document.getElementById('userdni').value });
+        } else {
+            document.getElementById('userdni').style.border = "3px solid red";
+        }
+    },false);
     
 },false);
+
+var getCookies = function(){
+    var pairs = document.cookie.split(";");
+    var cookies = {};
+    for (var i=0; i<pairs.length; i++){
+        var pair = pairs[i].split("=");
+        cookies[(pair[0]+'').trim()] = unescape(pair[1]);
+    }
+    return cookies;
+}
 
 function cargarContenido() {
     /*
@@ -65,12 +91,16 @@ function ceroProductos() {
     var n = document.createElement("TD");
     n.setAttribute("class", "btncontainer");
     var m = document.createElement("BUTTON");
+    m.setAttribute("id","finalizarcompra");
     m.appendChild(document.createTextNode("Finalizar Compra"));
     n.appendChild(m);
     c.appendChild(v);
     c.appendChild(b);
     c.appendChild(n);
     document.getElementById("cesta").appendChild(c);
+
+    document.getElementsByClassName("dniinput")[0].style.display = "none";
+
 }
 
 /* El unico uso de este código es la sustitución de elementos de la tabla */
