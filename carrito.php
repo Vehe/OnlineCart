@@ -66,18 +66,20 @@
 
                         if(isset($_COOKIE) && count($_COOKIE) > 0) {
                             foreach ($_COOKIE as $key=>$val){
-                                $query = mysqli_prepare($conexion,'select pvp from productos where nombre=?');
-                                mysqli_stmt_bind_param($query,'s',$key);
-                                mysqli_stmt_execute($query);
-                                mysqli_stmt_bind_result($query,$precio);
-                                mysqli_stmt_fetch($query);
-                                $sumatotal += $val*floatval($precio);
-                                echo '<tr id="'.$key.'">';
-                                echo '<td>'.$val.'</td>';
-                                echo '<td>'.$key.'  <a href="#" id="'.$key.'" class="borrarproducto">Borrar</a></td>';
-                                echo '<td id="precio'.$key.'">'.($val*floatval($precio)).'€</td>';
-                                echo '</tr>';
-                                mysqli_stmt_close($query);
+                                if(substr($key, 0, 8) == 'PRODUCTO'){
+                                    $query = mysqli_prepare($conexion,'select pvp from productos where nombre=?');
+                                    mysqli_stmt_bind_param($query,'s',$key);
+                                    mysqli_stmt_execute($query);
+                                    mysqli_stmt_bind_result($query,$precio);
+                                    mysqli_stmt_fetch($query);
+                                    $sumatotal += $val*floatval($precio);
+                                    echo '<tr id="'.$key.'">';
+                                    echo '<td>'.$val.'</td>';
+                                    echo '<td>'.$key.'  <a href="#" id="'.$key.'" class="borrarproducto">Borrar</a></td>';
+                                    echo '<td id="precio'.$key.'">'.($val*floatval($precio)).'€</td>';
+                                    echo '</tr>';
+                                    mysqli_stmt_close($query);
+                                }
                             }
                         } else {
                             echo '<tr><td colspan="3">No se encuentran productos.</td></tr>';

@@ -2,7 +2,12 @@
 
     include '../../seguridad/carrito/dbconnect.php';
 
-    /* Se realiza la conexion con la base de datos */
+    /* 
+        Archivo que sirve para comprobar el funcionamiento del FOR UPDATE
+        para probarlo solo hay que comprar el producto 7 en el carrito, ejecutar este archivo,
+        he intentar realizar el pedido en la otra pestaña, si funciona bien, no se realizara el procesamiento
+        del carrito hasta que este script haya acabado.
+    */
     $conexion = @mysqli_connect(IP,USER,PW,DB);
     if(!$conexion){ echo '<h1 style="color:red;text-align:center;">Ha ocurrido un error al conectarse a la DB</h1>'; exit; }
     mysqli_set_charset($conexion,'utf8');
